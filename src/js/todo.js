@@ -1,3 +1,4 @@
+let counterId = 0;
 export const allProject = [];
 export class Project{
     constructor(name){
@@ -10,8 +11,8 @@ export class Project{
         this.todos.push(todo);
     }
 }
-
 export const templateProject = new Project("template");
+
 export class ToDo{
     constructor(title, description, dueDate, priority, project=templateProject){
         this.title = title;
@@ -19,6 +20,8 @@ export class ToDo{
         this.dueDate = dueDate;
         this.priority = priority;
         this.checkList = false;
+        this.id = counterId;
+        counterId++;
         project.addToDo(this);
     }
 
@@ -31,5 +34,6 @@ export class ToDo{
     }
 }
 
+const testTodo = new ToDo("butuh dikerjakann", "CEPATTT", "15 Januari", "high");
 
 
