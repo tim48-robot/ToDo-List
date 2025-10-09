@@ -3,12 +3,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: './src/index.js',
+    app: './src/js/index.js',
   },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'ToDo List',
-      template: "./src/index.html"
+      template: "./src/template.html",
+      favicon: "./src/favicon.ico"
     }),
   ],
   output: {
