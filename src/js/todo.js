@@ -11,17 +11,19 @@ export class Project{
         this.todos.push(todo);
     }
 }
+
 export const templateProject = new Project("template");
 
 export class ToDo{
-    constructor(title, description, dueDate, priority, project=templateProject){
+    constructor(title, description, dueDate, priority, checkList=false, project=templateProject){
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
-        this.checkList = false;
+        this.checkList = checkList;
         this.id = counterId;
         counterId++;
+        localStorage.setItem("counterId", counterId);
         project.addToDo(this);
     }
 
