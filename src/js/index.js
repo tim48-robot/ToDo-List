@@ -1,7 +1,13 @@
-import { ToDo, templateProject, Project, allProject} from "./todo.js";
+import { ToDo, Project, allProject} from "./todo.js";
+let templateProject;
 import "../styles.css";
+const button = document.querySelector("#createnew");
+const modal = document.querySelector("#idModal");
+const form = modal.querySelector("form#todoForm");
+const closeButton = modal.querySelector("#closeModal");
 
-(function renderProject(){
+
+function renderProject(){
     if ((localStorage.getItem("allProject")) === null){}
     else{
         deleteAll();
@@ -16,6 +22,12 @@ import "../styles.css";
         });
     }
 
+    if (allProject.length > 0) {
+        templateProject = allProject.find(project => project.name === "template") || allProject[0];
+    } else {
+        templateProject = new Project("template");
+    }
+
     for (let i=0; i<allProject.length; i++){
         let project = allProject[i];
 
@@ -23,7 +35,7 @@ import "../styles.css";
             addToDom(project.todos[j]);
         }
     }
-}())
+}
 
 function addToDom(objectToDo){
    const todo = document.createElement("div");
@@ -70,3 +82,36 @@ function deleteAll(){
     const tempatTodo = document.querySelector("#semuatodo");
     tempatTodo.innerHTML = "";
 }
+
+function showModal(){
+    modal.classList.add("show");
+}
+
+
+button.addEventListener("click", showModal);
+closeButton.addEventListener("click", () => {
+    modal.classList.remove("show");
+})
+
+modal.addEventListener("click", (e)=> {
+    if (e.target === modal){
+        modal.classList.remove("show");
+    }
+})
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const title = form.querySelector("input[name=title]").value;
+    const description = form.querySelector("textarea[name=description]").value;
+    const duedate = form.querySelector("input[name=duedate]").value;
+    const priority = form.querySelector("select[name=priority]").value;
+    const newTodo = new ToDo(title, description, duedate, priority, false, templateProject);
+    console.log(allProject)
+    console.log(newTodo)
+    localStorage.setItem("allProject", JSON.stringify(allProject));
+    addToDom(newTodo);
+    modal.classList.remove("show");
+    form.reset();
+})
+
+renderProject()
