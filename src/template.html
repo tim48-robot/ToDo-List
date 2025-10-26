@@ -7,8 +7,44 @@
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
 </head>
 <body>
+    <div class="wrapper">
+    <header>
+        To-Do List
+    <button id="createnew">Create To-Do</button>
+    </header>
     <div id="semuatodo">
 
+    </div>
+    <div class="modal" id="idModal">
+        <div class="modal-container">
+        <div id="modalHeader">
+            <h2>Create New To-Do</h2>
+            <button id="closeModal">×</button>
+        </div>
+        <div id="modalContent">
+            <form id="todoForm">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" placeholder="Title" required>
+                <label for="description">Description</label>
+                <textarea name="description" id="description" placeholder="description" required></textarea>
+                <label for="duedate">Due Date</label>
+                <input type="date" name="duedate" id="duedate" placeholder="Due Date" required>
+                <label for="priority">Priority</label>
+                <select name="priority" id="priority" required>
+                    <option value="" disabled selected>Select Priority</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+                <button type="submit">Create Todo</button>
+
+            </form>
+        </div>
+
+
+
+
+        </div>
     </div>
 </body>
 </html>
